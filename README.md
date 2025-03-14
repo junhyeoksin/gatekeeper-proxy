@@ -1,6 +1,6 @@
 # Gatekeeper Middle Proxy
 
-![Gatekeeper 아키텍처](https://via.placeholder.com/800x400?text=Gatekeeper+Architecture)
+<!-- ![Gatekeeper 아키텍처](https://via.placeholder.com/800x400?text=Gatekeeper+Architecture) -->
 
 ## 프로젝트 개요
 
@@ -32,7 +32,7 @@ gatekeeper-proxy/
 ├── settings.gradle
 ├── Dockerfile
 └── README.md  
-
+```
 ## 주요 기능
 
 * **통합 인증/인가 시스템**

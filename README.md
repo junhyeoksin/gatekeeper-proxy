@@ -106,8 +106,7 @@ gatekeeper-proxy/
 
 1. 프로젝트 클론
    ```bash
-   git clone https://github.com/your-organization/gatekeeper-proxy.git
-   cd gatekeeper-proxy
+   git clone https://github.com/junhyeoksin/gatekeeper-proxy.git
    ```
 
 2. 애플리케이션 빌드

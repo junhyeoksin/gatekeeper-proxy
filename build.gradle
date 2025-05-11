@@ -36,39 +36,39 @@ dependencyManagement {
 }
 
 dependencies {
-    // Spring Boot
+    // WebFlux & Security
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    
-    // Spring Cloud
-    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
-    
-    // Security
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.springframework.security:spring-security-oauth2-jose'
-    
-    // Keycloak
-    implementation 'org.keycloak:keycloak-spring-boot-starter'
+
+    // Spring Cloud Gateway & Circuit Breaker
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
+
+    // Keycloak Admin Client (no spring adapter!)
     implementation 'org.keycloak:keycloak-admin-client:23.0.0'
-    
-    // Redis (세션 관리)
+
+    // Redis (Reactive)
     implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
     implementation 'org.springframework.session:spring-session-data-redis'
-    
+
+    // JWT 유틸용
+    implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
+
     // Monitoring
     implementation 'io.micrometer:micrometer-tracing-bridge-brave'
     implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
-    
-    // API Documentation
+
+    // API 문서 (Swagger)
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
-    
+
     // Lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    
+
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
@@ -76,8 +76,9 @@ dependencies {
 }
 
 bootJar {
-    baseName = project.name
-    version = project.version
+    archiveBaseName = project.name
+    archiveVersion = project.version
+    archiveClassifier = ''
 }
 
 docker {
@@ -88,4 +89,4 @@ docker {
 
 test {
     useJUnitPlatform()
-} 
+}

@@ -8,32 +8,26 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-@Slf4j
 @Component
+@Slf4j
 public class KeycloakConfig {
 
-    private static String serverUrl;
-    private static String realm;
+    private static String issuerUri;
     private static String clientId;
     private static String clientSecret;
     private static Keycloak keycloak;
 
-    @Value("${keycloak.auth-server-url}")
-    public void setServerUrl(String serverUrl) {
-        KeycloakConfig.serverUrl = serverUrl;
+    @Value("${spring.security.oauth2.client.provider.keycloak.issuer-uri}")
+    public void setIssuerUri(String issuerUri) {
+        KeycloakConfig.issuerUri = issuerUri;
     }
 
-    @Value("${keycloak.realm}")
-    public void setRealm(String realm) {
-        KeycloakConfig.realm = realm;
-    }
-
-    @Value("${keycloak.resource}")
+    @Value("${spring.security.oauth2.client.registration.keycloak.client-id}")
     public void setClientId(String clientId) {
         KeycloakConfig.clientId = clientId;
     }
 
-    @Value("${keycloak.credentials.secret}")
+    @Value("${spring.security.oauth2.client.registration.keycloak.client-secret}")
     public void setClientSecret(String clientSecret) {
         KeycloakConfig.clientSecret = clientSecret;
     }
@@ -41,9 +35,11 @@ public class KeycloakConfig {
     @Bean
     public static Keycloak getKeycloakInstance() {
         if (keycloak == null) {
-            log.info("Keycloak 인스턴스를 초기화하는 중입니다 serverUrl: {}, realm: {}, clientId: {}",
-                    serverUrl, realm, clientId);
-            
+            String realm = issuerUri.substring(issuerUri.lastIndexOf("/") + 1);
+            String serverUrl = issuerUri.replace("/realms/" + realm, "");
+
+            log.info("Keycloak 인스턴스를 초기화합니다. serverUrl: {}, realm: {}, clientId: {}", serverUrl, realm, clientId);
+
             keycloak = KeycloakBuilder.builder()
                     .serverUrl(serverUrl)
                     .realm(realm)
@@ -54,4 +50,8 @@ public class KeycloakConfig {
         }
         return keycloak;
     }
-} 
+
+    public static String getRealm() {
+        return issuerUri.substring(issuerUri.lastIndexOf("/") + 1);
+    }
+}

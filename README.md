@@ -127,6 +127,19 @@ gatekeeper-proxy/
 
 ## 설정
 
+http://localhost:8080/realms/{realm}/.well-known/openid-configuration
+
+로그인
+http://localhost:8081/oauth2/authorization/keycloak
+
+로그아웃
+http://localhost:8080/realms/myrealm/protocol/openid-connect/logout
+
+레디스 세션 아이디 삭제
+curl -X DELETE http://localhost:8081/auth-clear/4f7068d7-40ac-44e6-a437-c3c7c7fe55e0
+
+
+
 ### application.yml
 
 기본 설정 파일입니다. 공통 설정을 포함합니다.

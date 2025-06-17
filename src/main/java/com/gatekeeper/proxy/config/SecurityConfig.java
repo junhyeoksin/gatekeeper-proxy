@@ -32,6 +32,8 @@ public class SecurityConfig {
                         .pathMatchers("/actuator/**").permitAll()
                         .pathMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .pathMatchers("/auth/**").permitAll()
+                        // 캐시삭제용 엔드포인트 
+                        .pathMatchers("/auth-clear/**").permitAll()
                         .pathMatchers("/auth-check/**").authenticated()
                         .anyExchange().authenticated()
                 )

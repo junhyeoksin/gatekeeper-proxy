@@ -1,0 +1,66 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: gatekeeper-proxy
+  data:
+    redis:
+      #      host: ${SPRING_DATA_REDIS_HOST:redis}  # 환경 변수 또는 기본값 'redis'
+      host: redis.keystrom.site
+      port: 6379
+      ssl:
+        #enabled: false
+        enabled: true
+      timeout: 10000
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+    cache:
+      type: redis
+
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ${keycloak.resource}
+            client-secret: ${keycloak.credentials.secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          keycloak:
+            issuer-uri: "${keycloak.auth-server-url}/realms/${keycloak.realm}"
+            user-name-attribute: preferred_username
+
+# Keycloak 공통 설정은 spring 다음에 위치시키셔도 좋습니다
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  realm: wendy-realm
+  resource: wendy-app
+  credentials:
+    secret: ${KEYCLOAK_CLIENT_SECRET}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.security: INFO
+    com.gatekeeper.proxy: DEBUG

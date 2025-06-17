@@ -21,8 +21,12 @@ public class RedisService {
      * Redis에 문자열 값 저장 (TTL 설정 가능)
      */
     public Mono<Boolean> set(String key, String value, Duration ttl) {
-        return redisTemplate.opsForValue()
-                .set(key, value, ttl);
+        return redisTemplate.opsForValue().set(key, value, ttl)
+                .doOnNext(result -> System.out.println("🟢 Redis 저장 성공 여부: " + result + " key=" + key))
+                .onErrorResume(e -> {
+                    System.out.println("❌ Redis 저장 실패 key=" + key + " error=" + e.getMessage());
+                    return Mono.just(false);
+                });
     }
 
     /**
@@ -38,6 +42,7 @@ public class RedisService {
      */
     public Mono<Boolean> delete(String key) {
         return redisTemplate.delete(key)
-                .map(deletedCount -> deletedCount > 0);
+                .map(deletedCount -> deletedCount > 0)
+                .doOnNext(deleted -> System.out.println("🔴 delete key='{}'? {}"+  key + " :: "  + deleted));
     }
 }

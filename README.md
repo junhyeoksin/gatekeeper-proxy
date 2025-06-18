@@ -127,6 +127,44 @@ gatekeeper-proxy/
 
 ## 설정
 
+
+
+Client ID : testuser
+
+Root URL
+http://localhost:8081
+
+Home URL
+http://localhost:8081
+
+Valid redirect URIs
+http://localhost:8081/login/oauth2/code/keycloak
+
+Valid post logout redirect URIs
+http://localhost:8081/
+
+Web origins
+http://localhost:8081
+
+Admin URL
+http://localhost:8081
+
+Client authentication
+: on
+
+Authentication flow
+: Standard flow
+Direct access grants
+OAuth 2.0 Device Authorization Grant
+
+Front channel logout ,
+:0n
+
+Backchannel logout session required
+:on
+
+User 에 계정 만든 후에 password 설정 후 시크릿 키 값 넣기
+
 http://localhost:8080/realms/{realm}/.well-known/openid-configuration
 
 로그인

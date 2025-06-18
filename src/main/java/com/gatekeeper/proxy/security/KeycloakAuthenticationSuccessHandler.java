@@ -41,22 +41,22 @@ public class KeycloakAuthenticationSuccessHandler implements ServerAuthenticatio
 
             long secondsToExpire = expiresAt.getEpochSecond() - Instant.now().getEpochSecond();
             if (secondsToExpire <= 0) {
-                log.warn("⚠️ Keycloak token TTL 0 or negative — using fallback of 60 seconds");
+                log.warn("Keycloak token TTL 0 or negative — using fallback of 60 seconds");
                 secondsToExpire = 60;
             }
             Duration tokenTTL = Duration.ofSeconds(secondsToExpire);
 
             try {
                 String profileJson = objectMapper.writeValueAsString(user.getClaims());
-                log.info("✅ 로그인 성공 - Redis에 사용자 캐시 저장 userId: {}", userId);
-                log.info("⏱️ TTL: {} seconds", secondsToExpire);
+                log.info("로그인 성공 - Redis에 사용자 캐시 저장 userId: {}", userId);
+                log.info("TTL: {} seconds", secondsToExpire);
 
                 cacheMono = Mono.when(
                         redisService.set("auth:token:" + userId, accessToken, tokenTTL),
                         redisService.set("auth:profile:" + userId, profileJson, Duration.ofMinutes(30))
                 );
             } catch (JsonProcessingException e) {
-                log.error("❌ Redis 캐싱 중 오류 발생", e);
+                log.error("Redis 캐싱 중 오류 발생", e);
             }
         }
 

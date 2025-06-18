@@ -58,9 +58,9 @@ dependencies {
     // JWT 유틸용
     implementation 'com.nimbusds:nimbus-jose-jwt:9.37.3'
 
-    // Monitoring
-    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+//    // Monitoring
+//    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+//    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 
     // API 문서 (Swagger)
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'

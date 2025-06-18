@@ -133,6 +133,9 @@ http://localhost:8080/realms/{realm}/.well-known/openid-configuration
 http://localhost:8081/oauth2/authorization/keycloak
 
 로그아웃
+http://localhost:8081/logout
+
+
 http://localhost:8080/realms/myrealm/protocol/openid-connect/logout
 
 레디스 세션 아이디 삭제

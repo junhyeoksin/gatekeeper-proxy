@@ -1,0 +1,23 @@
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+*.log
+
+# Build
+/build/
+/out/
+/bin/
+/classes/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle/
+*.lock
+
+# Maven
+target/

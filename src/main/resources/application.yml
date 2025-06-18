@@ -1,5 +1,18 @@
 server:
   port: 8081
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    url: /v3/api-docs
+    oauth:
+      client-id: testuser
+      client-secret: kVPlrarTQz25mMEaU6A4rPL54b4C8hV7
+  api-docs:
+    path: /v3/api-docs
+  show-actuator: true
+  packages-to-scan: com.gatekeeper.proxy.controller
+  use-root-path: true
 
 spring:
   main:

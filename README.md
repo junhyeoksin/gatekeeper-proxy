@@ -136,12 +136,11 @@ http://localhost:8081/oauth2/authorization/keycloak
 http://localhost:8081/logout
 
 
-http://localhost:8080/realms/myrealm/protocol/openid-connect/logout
-
 레디스 세션 아이디 삭제
 curl -X DELETE http://localhost:8081/auth-clear/4f7068d7-40ac-44e6-a437-c3c7c7fe55e0
 
-
+스웨거
+http://localhost:8081/swagger-ui.html
 
 ### application.yml
 
@@ -154,7 +153,7 @@ curl -X DELETE http://localhost:8081/auth-clear/4f7068d7-40ac-44e6-a437-c3c7c7fe
 ## API 문서
 
 API 문서는 Swagger UI를 통해 제공됩니다.
-* 접속 URL: http://localhost:8080/swagger-ui.html
+* 접속 URL: http://localhost:8081/swagger-ui.html
 
 ## 라이선스
 

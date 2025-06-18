@@ -8,6 +8,11 @@ springdoc:
     oauth:
       client-id: testuser
       client-secret: kVPlrarTQz25mMEaU6A4rPL54b4C8hV7
+      use-pkce-with-authorization-code-grant: true
+      scopes:
+        - openid
+        - profile
+        - email
   api-docs:
     path: /v3/api-docs
   show-actuator: true
